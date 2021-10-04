@@ -12,7 +12,6 @@ const {
 const currentEnv = {
   development,
   test,
-  production
 }[NODE_ENV || 'development'];
 
 export default {

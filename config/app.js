@@ -7,11 +7,10 @@ import helmet from 'helmet';
 import expressFileUpload from 'express-fileupload';
 import { helpers, genericErrors, constants } from '../app/utils';
 import config from './env';
-import apiV1Routes from '../app/routes/v1';
-import { redisDB } from '../app/db';
+import apiRoutes from '../app/routes';
 
 const { GenericHelper: { errorResponse, successResponse } } = helpers;
-const { WELCOME, AFRICAFORYOU_RUNNING, v1, REDIS_RUNNING } = constants;
+const { WELCOME, AFRICAFORYOU_RUNNING } = constants;
 const { notFoundApi } = genericErrors;
 
 const appConfig = (app) => {
@@ -26,12 +25,11 @@ const appConfig = (app) => {
   app.use(urlencoded({ extended: true }));
   app.use(expressFileUpload({ useTempFiles: true }));
   app.get('/', (req, res) => successResponse(res, { message: WELCOME }));
-  app.use(v1, apiV1Routes);
+  app.use(apiRoutes);
   app.use((req, res, next) => {
     next(notFoundApi);
   });
   app.use((err, req, res, next) => errorResponse(req, res, err));
-  redisDB.on('connect', () => logger.info(REDIS_RUNNING));
   const port = config.PORT || 3249;
   app.listen(port, () => {
     logger.info(`${AFRICAFORYOU_RUNNING} ${port}`);

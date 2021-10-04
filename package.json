@@ -6,14 +6,19 @@
   "scripts": {
     "test": "nyc --reporter=lcov --reporter=text --reporter=text-summary cross-env AFRICAFORYOU_NODE_ENV=test mocha -c -r esm test/**/*.test.js --timeout 12000 --exit",
     "pretest": "cross-env AFRICAFORYOU_NODE_ENV=test npm run migrate:reset && cross-env AFRICAFORYOU_NODE_ENV=test npm run migrate up ",
-    "dev": "nodemon -r esm app",
-    "start": "node -r esm app",
+    "dev": "nodemon -r esm .",
+    "start": "node -r esm .",
     "migrate": "db-migrate --migrations-dir ./app/db/migrations",
     "migrate:up": "npm run migrate up",
     "migrate:down": "npm run migrate down",
     "migrate:reset": "npm run migrate reset",
     "migrate:create": "npm run migrate create"
   },
+  "keywords": [
+    "coil",
+    "interledger",
+    "webmonetization"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -34,7 +39,7 @@
     "ioredis": "^4.27.10",
     "joi": "^17.4.2",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.13",
+    "nodemon": "^2.0.12",
     "winston": "^3.3.3"
   },
   "devDependencies": {
