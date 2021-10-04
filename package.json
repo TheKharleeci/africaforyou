@@ -1,0 +1,19 @@
+{
+  "name": "africaforyou",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "nyc --reporter=lcov --reporter=text --reporter=text-summary cross-env AFRICAFORYOU_NODE_ENV=test mocha -c -r esm test/**/*.test.js --timeout 12000 --exit",
+    "pretest": "cross-env AFRICAFORYOU_NODE_ENV=test npm run migrate:reset && cross-env AFRICAFORYOU_NODE_ENV=test npm run migrate up ",
+    "dev": "nodemon -r esm app",
+    "start": "node -r esm app",
+    "migrate": "db-migrate --migrations-dir ./app/db/migrations",
+    "migrate:up": "npm run migrate up",
+    "migrate:down": "npm run migrate down",
+    "migrate:reset": "npm run migrate reset",
+    "migrate:create": "npm run migrate create"
+  },
+  "author": "",
+  "license": "ISC"
+}
