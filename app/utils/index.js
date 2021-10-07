@@ -1,6 +1,7 @@
-import constants from './constants/api.message';
+import constants from './constants';
 import genericErrors from './errors/generic';
 import ApiError from './errors/api.error';
+import ModuleError from './errors/module.error';
 import DBError from './errors/db.error';
 import * as helpers from './helpers';
 
@@ -9,5 +10,6 @@ export {
   helpers,
   genericErrors,
   ApiError,
-  DBError
+  DBError,
+  ModuleError
 };

@@ -1,0 +1,12 @@
+{
+    "development": {
+      "ENV": "AFRICAFORYOU_POSTGRES_DEV_URL"
+    },
+    "test": {
+      "ENV": "AFRICAFORYOU_POSTGRES_TEST_URL"
+    },
+    "defaultEnv": {
+      "ENV": "AFRICAFORYOU_NODE_ENV"
+    },
+    "sql-file": true
+  }

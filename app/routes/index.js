@@ -1,8 +1,9 @@
-import welcomeRoutes from './welcome';
+import { Router } from 'express';
 
-const baseUrl = '/api/v1';
-const routes = app => {
-  app.use(`${baseUrl}`, welcomeRoutes);
-};
+import authRoutes from './auth';
 
-export default routes;
+const router = Router();
+
+router.use('/auth', authRoutes);
+
+export default router;
