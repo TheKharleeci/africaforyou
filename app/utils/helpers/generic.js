@@ -1,5 +1,6 @@
 import genericError from '../errors/generic';
 import constants from '../constants/api.message';
+import { nanoid } from 'nanoid';
 import DBError from '../errors/db.error';
 
 const { serverError } = genericError;
@@ -9,6 +10,16 @@ const { FAIL, SUCCESS, SUCCESS_RESPONSE } = constants;
  * @class GenericHelper
  */
 class GenericHelper {
+
+  /**
+   * It generates a uniqueId.
+   * @static
+   * @memberof GenericHelper
+   * @returns {String} - A unique string.
+   */
+  static generateId(length) {
+    return nanoid(length);
+  }
 
   /**
    * It finds user ip address.

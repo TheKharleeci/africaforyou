@@ -1,8 +1,16 @@
+import { Router } from 'express';
+
 import welcomeRoutes from './welcome';
+import authRoutes from './auth';
 
-const baseUrl = '/api/v1';
-const routes = app => {
-  app.use(`${baseUrl}`, welcomeRoutes);
-};
+const router = Router();
 
-export default routes;
+router.use('/auth', authRoutes);
+
+
+// const baseUrl = '/api/v1';
+// const routes = app => {
+//   app.use(`${baseUrl}`, welcomeRoutes);
+// };
+
+export default router;
