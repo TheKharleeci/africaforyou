@@ -7,6 +7,8 @@ import {
     invalidSignUpObj,
     rightSignUpObj,
     duplicateSignUpObj,
+    rightLoginObj,
+    wrongLoginObj
   } from '../fixtures/auth';
 
 const { expect } = chai;
@@ -42,7 +44,7 @@ describe('Auth Routes', () => {
         done(err);
       });
   });
-  it('should fail to sign up user, DUPLICATED ENTITY', (done) => {
+  it('should fail to sign up user', (done) => {
     chai
       .request(app)
       .post('/auth/signup')
@@ -50,6 +52,29 @@ describe('Auth Routes', () => {
       .end((err, res) => {
         expect(res.body.status).to.equal(FAIL);
         expect(res.body.message).to.equal(user_info_email_key);
+        done(err);
+      });
+  });
+
+  it('should fail to login a user', (done) => {
+    chai
+      .request(app)
+      .post('/auth/login')
+      .send(wrongLoginObj)
+      .end((err, res) => {
+        expect(res.body.status).to.equal(FAIL);
+        done(err);
+      });
+  });
+
+  it('should login a user properly', (done) => {
+    chai
+      .request(app)
+      .post('/auth/login')
+      .send(rightLoginObj)
+      .end((err, res) => {
+        process.env.USER_ONE_TOKEN = `Bearer ${res.body.data.token}`;
+        expect(res.body.status).to.equal(SUCCESS);
         done(err);
       });
   });

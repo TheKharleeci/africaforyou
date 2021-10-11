@@ -3,7 +3,7 @@ import { sha256 } from 'js-sha256';
 import bcrypt from 'bcrypt';
 import config from '../../../config/env';
 
-const { SECRET, REFRESH_SECRET } = config;
+const { SECRET } = config;
 
 /**
  *Contains AuthHelper methods
@@ -92,10 +92,7 @@ export default class AuthHelper {
    */
   static addTokenToData(user) {
     const expiresIn = '14h';
-    const token = AuthHelper.generateToken(user, SECRET, expiresIn);
-    const refreshToken = AuthHelper.generateToken(user, REFRESH_SECRET, expiresIn);
-
-    return { token, refreshToken };
+    return AuthHelper.generateToken(user, SECRET, expiresIn);
   }
 
   /**

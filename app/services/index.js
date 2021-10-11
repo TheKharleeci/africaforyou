@@ -1,3 +1,4 @@
 import EmailService from './email';
+import UserService from './user';
 
-export default EmailService;
+export { EmailService, UserService };

@@ -15,3 +15,7 @@ export const forgotPasswordSchema = Joi.object({
   email: emailCheck()
 });
 
+export const loginSchema = Joi.object({
+  email: emailCheck(),
+  password: passwordCheck()
+});

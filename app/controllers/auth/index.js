@@ -6,13 +6,14 @@ import config from '../../../config/env';
 const {
   SIGNUP_SUCCESSFUL,
   RESOURCE_CREATE_ERROR_STATUS,
-  VERIFICATION_SUCCESSFUL,
+  LOGIN_SUCCESSFUL,
   VERIFICATION_FAIL,
+  SIGNIN_ERROR,
   events: {
     SEND_CONFIRMATION_EMAIL }
 } = constants;
 const {
-  AuthHelper: { hashString, generateToken },
+  AuthHelper: { hashString, generateToken, addTokenToData },
   GenericHelper: { successResponse, moduleErrLogMessager },
   ErrorFactory: { resolveError },
 } = helpers;
@@ -50,6 +51,35 @@ class AuthController {
       moduleErrLogMessager(dbError);
       next(error);
     }
+  }
+
+    /**
+   * logs in user
+   *
+   * @static
+   * @param {Request} req - The request from the endpoint.
+   * @param {Response} res - The response returned by the method.
+   * @returns { JSON } A JSON response with a success message or error.
+   * @memberof AuthController
+   */
+  static async loginUser(req, res, next) {
+      try {
+        const { id, email } = req.user;
+        const token = addTokenToData({ id, email });
+        const data = { ...req.user, token };
+        successResponse(res, {
+          message: LOGIN_SUCCESSFUL('User'),
+          data
+        });
+      } catch (e) {
+        const error = resolveError(e);
+        const dbError = new DBError({
+          status: SIGNIN_ERROR('User'),
+          message: e.message
+        });
+        moduleErrLogMessager(dbError);
+        next(error);
+      }
   }
 }
 
